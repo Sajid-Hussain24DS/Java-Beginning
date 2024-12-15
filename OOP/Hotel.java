@@ -6,6 +6,17 @@ class Hotel{
     String dinnerMenu;
     String beveragesMenu;
 
+// here we call object with help of Method
+    public void displayMenuPrice(double price){
+        double eggPrice = 100;
+        double teaPrice = 50;
+
+        System.out.println("Egg price at khandhaba hotel is "+eggPrice);
+        System.out.println("Tea price at khandhaba hotel is "+teaPrice);
+        System.out.println("Your order bill become "+(eggPrice+teaPrice));
+    }
+
+
     public static void main(String args[]){
         Hotel khanDhaba = new Hotel();
         khanDhaba.name = "Khan Dhaba";
@@ -16,6 +27,7 @@ class Hotel{
         System.out.println("Name:"+khanDhaba.name);
         System.out.println("Location:"+khanDhaba.location);
         System.out.println("Menu:"+khanDhaba.breakFastMenu);
+        khanDhaba.displayMenuPrice(150);
 
 
 
