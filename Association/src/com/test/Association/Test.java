@@ -13,9 +13,9 @@ public class Test {
 
         laptop.setHardDrive(hd);
         
-        System.out.println("Company"+laptop.getCompany());
-        System.out.println("HardDrive"+laptop.getHardDrive().getPrice());
-        System.out.println("HardDrive"+laptop.getHardDrive().getName());
+        System.out.println("Company :"+laptop.getCompany());
+        System.out.println("HardDrive :"+laptop.getHardDrive().getPrice());
+        System.out.println("HardDrive :"+laptop.getHardDrive().getName());
 
 
 
