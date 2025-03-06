@@ -3,8 +3,8 @@ package com.test.Association;
 public class Laptop {
     private String company;
     private double price;
-    private String serialNo;
-    private String HardDrive;
+    private double macAddress;
+    private HardDrive hardDrive;
 
     public String getCompany() {
         return company;
@@ -22,19 +22,19 @@ public class Laptop {
         this.price = price;
     }
 
-    public String getSerialNo() {
-        return serialNo;
+    public double getMacAddress() {
+        return macAddress;
     }
 
-    public void setSerialNo(String serialNo) {
-        this.serialNo = serialNo;
+    public void setMacAddress(double macAddress) {
+        this.macAddress = macAddress;
     }
 
-    public void setHardDrive(HardDrive hd) {
-
+    public HardDrive getHardDrive() {
+        return hardDrive;
     }
 
-    public String getHardDrive() {
-        return HardDrive;
+    public void setHardDrive(HardDrive hardDrive) {
+        this.hardDrive = hardDrive;
     }
 }
