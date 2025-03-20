@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class LibraryManagmentSystem {
+public class LibraryManagementSystem {
      ArrayList<Book> books = new ArrayList<>();
     ArrayList<Student> students = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
-    public  LibraryManagmentSystem() {
+    public LibraryManagementSystem() {
         books.add(new Book("Java  ",  56,90,"James Goslin",1 ));
         books.add(new Book( "CPP   ",   32, 100,   "Bjarne" ,2 ));
         books.add(new Book( "DotNet",   77, 110,"Andres" ,3 ));
@@ -151,7 +151,7 @@ public class LibraryManagmentSystem {
     }
 
     public static void main(String[] args) {
-        LibraryManagmentSystem libraryManagementSystem = new LibraryManagmentSystem();
+        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem();
         libraryManagementSystem.menu();
     }
 }
