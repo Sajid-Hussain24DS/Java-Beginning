@@ -8,11 +8,11 @@ class LibraryManagementSystem {
     Scanner scanner = new Scanner(System.in);
 
     public LibraryManagementSystem() {
-        books.add(new Book("Java  ",  56,90,"James Goslin",1 ));
-        books.add(new Book( "CPP   ",   32, 100,   "Bjarne" ,2 ));
-        books.add(new Book( "DotNet",   77, 110,"Andres" ,3 ));
-        books.add(new Book( "Python",   58, 120,"Andres",4));
-        books.add(new Book( "C#    ",   65, 130,"Andres",5));
+        books.add(new Book("Java  ",  90, "James Goslin",1,50 ));
+        books.add(new Book( "CPP   ",    100,   "Bjarne" ,2,60 ));
+        books.add(new Book( "DotNet",    110,   "Andres" ,3,70 ));
+        books.add(new Book( "Python",    120,    "Andres",4,80 ));
+        books.add(new Book( "C#    ",    130,    "Andres",5,90 ));
     }
 
     public void menu() {
@@ -60,7 +60,7 @@ class LibraryManagementSystem {
         System.out.print("Enter quantity: ");
         int quantity = scanner.nextInt();
 
-        Book newBook = new Book( bookName,bookId, isbian, author, quantity);
+        Book newBook = new Book( bookName,isbian,author, quantity,bookId);
         books.add(newBook);
         System.out.println("Book added successfully");
     }
@@ -111,14 +111,14 @@ class LibraryManagementSystem {
 
     public void showAllBooks() {
         System.out.println("Books in Library");
-        System.out.println("Book Nam   ISBAN     Author   Quantity  Book  ID");
+        System.out.println("Book Name   ISBAN     Author   Quantity  Book  ID");
         for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
-            String bookName = book.bookName +              "       ";
+            String bookName = book.bookName +                     "       ";
             String iban = book.bookIsbian   +              "       ";
             String author = book.bookAuthor +              "       ";
-            String quantity = String.valueOf(book.bookQuantity) +     "       ";
-            String bookId = String.valueOf(book.bookId) +     "       ";
+            String quantity = (book.bookQuantity) +    "       ";
+            String bookId = (book.bookId) +     "       ";
             System.out.println(bookName + iban + author + quantity + bookId);
         }
     }

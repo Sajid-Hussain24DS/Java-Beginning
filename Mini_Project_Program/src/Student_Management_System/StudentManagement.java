@@ -10,6 +10,7 @@ public class StudentManagement {
         department = new Department("SWE","12WE");
         student = new Student(department);
         sc = new Scanner(System.in);
+
     }
 
 

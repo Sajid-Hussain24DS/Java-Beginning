@@ -6,12 +6,12 @@ public class Book {
     int bookIsbian;
     String bookAuthor;
     int bookQuantity;
-    public Book(String bookName, int  bookId, int bookIsbian, String bookAuthor,int bookQuantity){
+    public Book(String bookName,  int bookIsbian, String bookAuthor,int bookQuantity,int  bookId){
         this.bookName = bookName;
-        this.bookId = bookId;
         this.bookIsbian = bookIsbian;
         this.bookAuthor = bookAuthor;
         this.bookQuantity = bookQuantity;
+        this.bookId = bookId;
     }
 
     public int getBookId() {
