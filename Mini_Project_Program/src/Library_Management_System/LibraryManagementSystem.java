@@ -26,6 +26,8 @@ class LibraryManagementSystem {
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
             scanner.nextLine();
+
+
             switch (choice) {
                 case 1:
                     addBook();
@@ -42,6 +44,8 @@ class LibraryManagementSystem {
                 case 5:
                     showAllStudents();
                     break;
+                case 6:
+                    System.exit(0);
                 default:
                     System.out.println("Invalid choice");
             }
@@ -51,54 +55,73 @@ class LibraryManagementSystem {
     public void addBook() {
         System.out.print("Enter name of book: ");
         String bookName = scanner.nextLine();
+
         System.out.print("Enter book ID: ");
         int bookId = scanner.nextInt();
+        scanner.nextLine();
+
         System.out.print("Enter book ISBIAN: ");
         int isbian = scanner.nextInt();
+        scanner.nextLine();
+
         System.out.print("Enter author name: ");
         String author = scanner.nextLine();
+
         System.out.print("Enter quantity: ");
         int quantity = scanner.nextInt();
+        scanner.nextLine();
 
-        Book newBook = new Book( bookName,isbian,author, quantity,bookId);
-        books.add(newBook);
+        books.add(new Book( bookName,isbian,author, quantity,bookId));
         System.out.println("Book added successfully");
     }
 
     public void issueBook() {
         System.out.print("Enter student name: ");
         String studentName = scanner.nextLine();
+
         System.out.print("Enter student ID: ");
         int studentId = scanner.nextInt();
+        scanner.nextLine();
+
         System.out.print("Enter student roll number: ");
         String rollNumber = scanner.nextLine();
+
         System.out.print("Enter book ISBIAN you want to issue: ");
         String isbian = scanner.nextLine();
+        scanner.nextLine();
+
         Book book = findBookByIban(isbian);
         if (book == null) {
             System.out.println("Invalid ISBAN Number");
-        } else {
+            return;
+        }
+
             if (book.getBookQuantity() > 0) {
-                students.add(new Student( studentName, studentId, rollNumber,isbian));
+                students.add(new Student( studentName, studentId, rollNumber,String.valueOf(isbian)));
                 book.setBookQuantity(book.getBookQuantity() - 1);
                 System.out.println("Book issued successfully");
             } else {
                 System.out.println("Book not available");
             }
         }
-    }
+
 
     public void returnBook() {
         System.out.print("Enter student ID: ");
         int studentId = scanner.nextInt();
+        scanner.nextLine();
+
         System.out.print("Enter book ISBAN you want to return: ");
-        String isbian = scanner.nextLine();
+        String  isbian = scanner.nextLine();
+        scanner.nextLine();
+
         Book book = findBookByIban(isbian);
         if (book == null) {
             System.out.println("Invalid ISBAN number Entered");
-        } else {
+            return;
+        }
             Student student = findStudentById(studentId);
-            if (student != null) {
+            if (student != null) {                                 //
                 students.remove(student);
                 book.setBookQuantity(book.getBookQuantity() + 1);
                 System.out.println("Book returned successfully!");
@@ -106,7 +129,6 @@ class LibraryManagementSystem {
                 System.out.println("Student ID not found");
             }
         }
-    }
 
 
     public void showAllBooks() {
@@ -115,11 +137,11 @@ class LibraryManagementSystem {
         for (int i = 0; i < books.size(); i++) {
             Book book = books.get(i);
             String bookName = book.bookName +                     "       ";
-            String iban = book.bookIsbian   +              "       ";
+            String isban = book.bookIsbn   +              "       ";
             String author = book.bookAuthor +              "       ";
             String quantity = (book.bookQuantity) +    "       ";
             String bookId = (book.bookId) +     "       ";
-            System.out.println(bookName + iban + author + quantity + bookId);
+            System.out.println(bookName +" "+ isban + author + quantity + bookId);
         }
     }
 
@@ -134,7 +156,7 @@ class LibraryManagementSystem {
 
     public Book findBookByIban(String isbian) {
         for (int i = 0; i < books.size(); i++) {
-            if (books.get(i).bookIsbian==Integer.parseInt(isbian)){
+            if (books.get(i).bookIsbn==Integer.parseInt(isbian)){
                 return books.get(i);
             }
         }
