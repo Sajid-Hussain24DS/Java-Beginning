@@ -1,6 +1,7 @@
 package Student_Management_System;
 
 
+
 public class Student {
     int id;
     String name, rollNumber, departmentCode;
