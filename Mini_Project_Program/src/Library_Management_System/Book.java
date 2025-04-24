@@ -19,12 +19,12 @@ public class Book {
     }
 
     public void setBookQuantity(int bookQuantity) {
+
         this.bookQuantity = bookQuantity;
     }
 
-    public void showBookData(){
-        System.out.println(bookName + "     " + bookId + "     " + bookIsbn + "     " + bookAuthor+"    "+bookQuantity);
+
     }
 
 
-}
+

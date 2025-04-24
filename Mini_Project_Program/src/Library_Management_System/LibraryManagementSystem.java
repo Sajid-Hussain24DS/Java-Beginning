@@ -1,4 +1,6 @@
 package Library_Management_System;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,6 +9,15 @@ class LibraryManagementSystem {
     ArrayList<Student> students = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
 
+    {
+        File newFile = new File("Library_Data.txt");
+        try {
+            newFile.createNewFile();
+            System.out.println("File Created Successfully!");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public LibraryManagementSystem() {
         books.add(new Book("Java  ",  90, "James Goslin",1,50 ));
         books.add(new Book( "CPP   ",    100,   "Bjarne" ,2,60 ));
@@ -62,17 +73,22 @@ class LibraryManagementSystem {
 
         System.out.print("Enter book ISBIAN: ");
         int isbian = scanner.nextInt();
-        scanner.nextLine();
 
         System.out.print("Enter author name: ");
         String author = scanner.nextLine();
 
         System.out.print("Enter quantity: ");
         int quantity = scanner.nextInt();
-        scanner.nextLine();
 
-        books.add(new Book( bookName,isbian,author, quantity,bookId));
+        LibraryRecord lR = new LibraryRecord();
+        String data = "Book Added:\nName: " + bookName + "\nID: " + bookId + "\nISBN: " + isbian + "\nAuthor: " + author + "\nQuantity: " + quantity;
+        lR.writeToFile(data);
+        lR.readToFile();
+
+
         System.out.println("Book added successfully");
+        //Book libraryBook = new Book(bookName, isbian, author, bookId, quantity);
+        //  books.add(libraryBook);
     }
 
     public void issueBook() {
@@ -89,6 +105,11 @@ class LibraryManagementSystem {
         System.out.print("Enter book ISBIAN you want to issue: ");
         String isbian = scanner.nextLine();
         scanner.nextLine();
+
+        LibraryRecord lR = new LibraryRecord();
+        String data = ("Book Issued:\nISBN: " + isbian + "\nTo: " + studentName + ", ID: " + studentId + ", Roll: " + rollNumber);
+        lR.writeToFile(data);
+        lR.readToFile();
 
         Book book = findBookByIban(isbian);
         if (book == null) {
@@ -114,6 +135,12 @@ class LibraryManagementSystem {
         System.out.print("Enter book ISBAN you want to return: ");
         String  isbian = scanner.nextLine();
         scanner.nextLine();
+
+
+        LibraryRecord lR = new LibraryRecord();
+        String data = ("Book Returned:\nISBN: " + isbian + "\nBy Student ID: " + studentId);
+        lR.writeToFile(data);
+        lR.readToFile();
 
         Book book = findBookByIban(isbian);
         if (book == null) {
@@ -171,10 +198,6 @@ class LibraryManagementSystem {
             }
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem();
-        libraryManagementSystem.menu();
     }}
+
 
