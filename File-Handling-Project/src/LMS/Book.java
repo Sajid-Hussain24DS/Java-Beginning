@@ -1,4 +1,5 @@
-package Library_Management_System;
+package LMS;
+
 public class Book {
 
     String bookName;
@@ -24,7 +25,8 @@ public class Book {
     }
 
 
-    }
+}
+
 
 
 

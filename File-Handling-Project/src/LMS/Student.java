@@ -1,4 +1,4 @@
-package Library_Management_System;
+package LMS;
 
 public class Student {
 

@@ -1,0 +1,7 @@
+Book Added:
+Name: java
+ID: 123
+ISBN: 9000
+Author: 
+Quantity: 1
+               

@@ -1,21 +1,36 @@
-package Library_Management_System;
+package LMS;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class LibraryManagementSystem {
-    ArrayList<Book> books = new ArrayList<>();
-    ArrayList<Student> students = new ArrayList<>();
-    Scanner scanner = new Scanner(System.in);
+ public class LibraryManagementSystem {
+     ArrayList<Book> books = new ArrayList<>();
+     ArrayList<Student> students = new ArrayList<>();
+     Scanner scanner = new Scanner(System.in);
+     {
+         File bookFile = new File("Book_Data.txt");
+         File studentFile = new File("Student_Data.txt");
+         try {
+             bookFile.createNewFile();
+             studentFile.createNewFile();
+             System.out.println("File Created Successfully!");
+         } catch (IOException e) {
+             throw new RuntimeException(e);
+         }
+     }
 
 
     public LibraryManagementSystem() {
         books.add(new Book("Java", 56, "james", 30, 14));
         books.add(new Book("CPP", 32, "Deen", 25, 89));
-        books.add(new Book("DotNet", 77, "Jame", 20, 21));
+       books.add(new Book("DotNet", 77, "Jame", 20, 21));
         books.add(new Book("Python", 58, "Alice", 15, 41));
-        books.add(new Book("C#", 65, "John", 10, 99));
-    }
-        public void menu() {
+       books.add(new Book("C#", 65, "John", 10, 99));
+   }
+
+
+     public void menu() {
         while (true) {
             System.out.println("Welcome to the Library System");
             System.out.println("1- Add Book into Library");
@@ -69,8 +84,13 @@ class LibraryManagementSystem {
         System.out.print("Enter quantity: ");
         int quantity = scanner.nextInt();
 
-        Book newBook = new Book(bookName, isbian, author, quantity, bookId);
-        books.add(newBook);
+        books.add(new Book(bookName, isbian, author, bookId, quantity));
+
+        String data = "Book Added:\nName: " + bookName + "\nID: " + bookId + "\nISBN: " + isbian + "\nAuthor: " + author + "\nQuantity: " + quantity;
+        new Library_Record().writeBookToFile(data);
+
+
+
         System.out.println("Book added successfully");
 
     }
@@ -95,14 +115,17 @@ class LibraryManagementSystem {
             System.out.println("Invalid ISBAN Number");
             return;
         }
-            if (book.getBookQuantity() > 0) {
-                students.add(new Student( studentName, studentId, rollNumber,String.valueOf(isbian)));
-                book.setBookQuantity(book.getBookQuantity() - 1);
-                System.out.println("Book issued successfully");
-            } else {
-                System.out.println("Book not available");
-            }
+        if (book.getBookQuantity() > 0) {
+            students.add(new Student( studentName, studentId, rollNumber,String.valueOf(isbian)));
+            book.setBookQuantity(book.getBookQuantity() - 1);
+            System.out.println("Book issued successfully");
+
+            String data = "Book Issued:\nISBN: " + isbian + "\nTo: " + studentName + ", ID: " + studentId + ", Roll: " + rollNumber;
+            new Library_Record().writeStudentToFile(data);
+        } else {
+            System.out.println("Book not available");
         }
+    }
 
 
     public void returnBook() {
@@ -120,15 +143,18 @@ class LibraryManagementSystem {
             return;
         }
 
-            Student student = findStudentById(studentId);
-            if (student != null) {
-                students.remove(student);
-                book.setBookQuantity(book.getBookQuantity() + 1);
-                System.out.println("Book returned successfully!");
-            } else {
-                System.out.println("Student ID not found");
-            }
+        Student student = findStudentById(studentId);
+        if (student != null) {
+            students.remove(student);
+            book.setBookQuantity(book.getBookQuantity() + 1);
+            System.out.println("Book returned successfully!");
+
+            String data = "Book Returned:\nISBN: " + isbian + "\nBy Student ID: " + studentId;
+            new Library_Record().writeStudentToFile(data);
+        } else {
+            System.out.println("Student ID not found");
         }
+    }
 
 
     public void showAllBooks() {
