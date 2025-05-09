@@ -2,6 +2,8 @@ package Multi_Threading;
 
 public class Test {
     public static void main(String[] args) {
+
+
         TestThreading testThreading = new TestThreading();
         Thread thread1 = new Thread(testThreading);
         thread1.start();
@@ -26,6 +28,7 @@ public class Test {
         Thread thread5 = new Thread(sortArray);
         thread5.start();
         System.out.println("Thread T5 : "+thread5.getName());
+
 
         Runnable runnable = new Runnable() {
             @Override
