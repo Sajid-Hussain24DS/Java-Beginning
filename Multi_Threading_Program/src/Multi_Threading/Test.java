@@ -5,13 +5,15 @@ public class Test {
         TestThreading testThreading = new TestThreading();
         Thread thread1 = new Thread(testThreading);
         thread1.start();
-        System.out.println("Thread t1 "+thread1.getName());
+        System.out.println("Thread t1: "+thread1.getName());
 
         GenerateSum generateSum = new GenerateSum();
-        Thread thread2 = new Thread(generateSum);
-        thread2.start();
-        System.out.println("Thread T2 "+thread2.getName());
+        System.out.println("The sum of array is: "+generateSum);
 
+        SumOfArray sumOfArray = new SumOfArray();
+        Thread thread3 = new Thread(sumOfArray);
+        thread3.start();
+        System.out.println("Thread T3: "+thread3.getName());
 
         Runnable runnable = new Runnable() {
             @Override
@@ -23,10 +25,10 @@ public class Test {
                 }
 
             };
-        Thread thread3 = new Thread(runnable);
-        thread3.start();
+        Thread thread4 = new Thread(runnable);
+        thread4.start();
 
-        Thread thread4 = new Thread() {
+        Thread thread5 = new Thread() {
             @Override
             public void run() {
                 for (int i=1; i<=10;i++) {
@@ -36,7 +38,7 @@ public class Test {
         }
 
         };
-        thread4.start();
+        thread5.start();
 
     }}
 
