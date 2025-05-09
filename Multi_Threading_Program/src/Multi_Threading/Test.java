@@ -8,7 +8,9 @@ public class Test {
         System.out.println("Thread t1: "+thread1.getName());
 
         GenerateSum generateSum = new GenerateSum();
-        System.out.println("The sum of array is: "+generateSum);
+        Thread thread2 = new Thread(generateSum);
+        thread2.start();
+        System.out.println("Thread T2: "+thread2.getName());
 
         SumOfArray sumOfArray = new SumOfArray();
         Thread thread3 = new Thread(sumOfArray);
