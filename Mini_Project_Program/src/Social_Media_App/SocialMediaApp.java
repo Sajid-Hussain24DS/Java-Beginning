@@ -210,6 +210,10 @@ while (true){
      }else {
             for (Post post: postMap.values()){
                 post.postInfo();
+
+               // postMap.values().stream()
+                    //    .forEach(Post::postInfo);
+
             }
         }
     }
