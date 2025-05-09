@@ -17,6 +17,16 @@ public class Test {
         thread3.start();
         System.out.println("Thread T3: "+thread3.getName());
 
+        RemoveDuplicateArray remove = new RemoveDuplicateArray();
+        Thread thread4 = new Thread(remove);
+        thread4.start();
+        System.out.println("Thread T4: "+thread4.getName());
+
+        SortArray sortArray = new SortArray();
+        Thread thread5 = new Thread(sortArray);
+        thread5.start();
+        System.out.println("Thread T5 : "+thread5.getName());
+
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -27,10 +37,10 @@ public class Test {
                 }
 
             };
-        Thread thread4 = new Thread(runnable);
-        thread4.start();
+        Thread thread6 = new Thread(runnable);
+        thread6.start();
 
-        Thread thread5 = new Thread() {
+        Thread thread7 = new Thread() {
             @Override
             public void run() {
                 for (int i=1; i<=10;i++) {
@@ -40,7 +50,7 @@ public class Test {
         }
 
         };
-        thread5.start();
+        thread7.start();
 
     }}
 
