@@ -20,4 +20,20 @@ public class DepartmentDBManager {
             e.printStackTrace();
         }
     }
+
+    public void deleteDepartment(int dept_id) {
+        try {
+            String sql = "DELETE FROM departments WHERE dept_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, dept_id);
+            int rowAffected = stmt.executeUpdate();
+            if (rowAffected > 0) {
+                System.out.println("Department deleted Successfully!");
+            } else
+                System.out.println("No department found with ID: " + dept_id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

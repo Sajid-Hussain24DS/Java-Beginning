@@ -24,4 +24,20 @@ public class BookDBManager {
             e.printStackTrace();
         }
     }
+
+    public void deleteBook(int book_id) {
+        try {
+            String sql = "DELETE FROM  books WHERE book_id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1,book_id);
+            int rowAffected = stmt.executeUpdate();
+            if (rowAffected > 0) {
+                System.out.println("Book deleted Successfully!");
+            } else
+                System.out.println("No Book found with ID: " + book_id);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+}
 }
