@@ -2,9 +2,13 @@ package DataBase;
 
 import DataBase.DBConnection;
 import Model.Book;
+import Model.Student;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookDBManager {
     Connection conn = DBConnection.getDbConnection();
@@ -40,4 +44,31 @@ public class BookDBManager {
             e.printStackTrace();
         }
 }
+
+    public List<Book> getAllBooks() {
+        List<Book> books = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM books";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            System.out.println("---- Book List ----");
+            while (rs.next()) {
+                int id = rs.getInt("book_id");
+                String name = rs.getString("book_name");
+                int isbn = rs.getInt("isbn");
+                String author = rs.getString("author");
+                int quantity = rs.getInt("quantity");
+
+
+                Book book = new Book(id, name, isbn, author, quantity);
+                books.add(book);
+                System.out.println(book);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
+
 }

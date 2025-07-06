@@ -4,6 +4,7 @@ import DataBase.BookDBManager;
 import DataBase.StudentDBManager;
 import DataBase.DepartmentDBManager;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -49,6 +50,8 @@ public class Main {
                         sc.nextLine();
                         Book book = new Book(bookId, bookName, isbn, author, qty);
                         bookDBManager.addBook(book);
+                        List<Book> books = bookDBManager.getAllBooks();
+                        System.out.println(books);
 
                     } else if (addChoice == 2) {
                         System.out.println("Enter Student ID:");
@@ -60,6 +63,8 @@ public class Main {
                         String rollNumber = sc.nextLine();
                         Student student = new Student(studentId, studentName, rollNumber);
                         studentDBManager.addStudent(student);
+                        List<Student> students = studentDBManager.getAllStudents();
+                        System.out.println(students);
 
                     } else if (addChoice == 3) {
                         System.out.println("Enter Department ID:");
@@ -71,6 +76,8 @@ public class Main {
                         String deptCode = sc.nextLine();
                         Department department = new Department(deptId, deptName, deptCode);
                         departmentDBManager.addDepartment(department);
+                        List<Department> departments = departmentDBManager.getAllDepartments();
+                        System.out.println(departments);
                     } else {
                         System.out.println("Invalid Option.");
                     }
