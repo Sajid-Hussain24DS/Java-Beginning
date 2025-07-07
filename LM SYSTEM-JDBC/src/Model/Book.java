@@ -3,13 +3,13 @@ package Model;
     public class Book {
         private int bookId;
         private String bookName;
-        private int isbn;
+        private String isbn;
         private String author;
         private int quantity;
 
-        public Book() {}
+      //  public Book(int bookId, String bookName, String isbn, String author, int qty) {}
 
-        public Book(int bookId, String bookName, int isbn, String author, int quantity) {
+        public Book(int bookId, String bookName, String isbn, String author, int quantity) {
             this.bookId = bookId;
             this.bookName = bookName;
             this.isbn = isbn;
@@ -31,10 +31,10 @@ package Model;
             this.bookName = bookName;
         }
 
-        public int getIsbn() {
+        public String getIsbn() {
             return isbn;
         }
-        public void setIsbn(int isbn) {
+        public void setIsbn(String isbn) {
             this.isbn = isbn;
         }
 

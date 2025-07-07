@@ -41,8 +41,7 @@ public class Main {
                         System.out.println("Enter Book Name:");
                         String bookName = sc.nextLine();
                         System.out.println("Enter ISBN:");
-                        int isbn = sc.nextInt();
-                        sc.nextLine();
+                        String isbn = sc.nextLine();
                         System.out.println("Enter Author:");
                         String author = sc.nextLine();
                         System.out.println("Enter Quantity:");

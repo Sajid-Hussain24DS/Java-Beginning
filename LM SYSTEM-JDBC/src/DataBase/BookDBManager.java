@@ -19,7 +19,7 @@ public class BookDBManager {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, book.getBookId());
             stmt.setString(2, book.getBookName());
-            stmt.setInt(3, book.getIsbn());
+            stmt.setString(3, book.getIsbn());
             stmt.setString(4, book.getAuthor());
             stmt.setInt(5, book.getQuantity());
             stmt.executeUpdate();
@@ -56,12 +56,12 @@ public class BookDBManager {
             while (rs.next()) {
                 int id = rs.getInt("book_id");
                 String name = rs.getString("book_name");
-                int isbn = rs.getInt("isbn");
+                String isbn = rs.getString("isbn");
                 String author = rs.getString("author");
                 int quantity = rs.getInt("quantity");
 
 
-                Book book = new Book(id, name, isbn, author, quantity);
+                Book book = new Book(id, name, isbn , author, quantity);
                 books.add(book);
                 System.out.println(book);
             }

@@ -12,7 +12,7 @@ public class StudentDBManager {
 
     public void addStudent(Student student) {
         try {
-            String sql = "INSERT INTO students (student_id, name, roll_number) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO students (student_id, student_name, roll_number) VALUES (?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, student.getStudentId());
             stmt.setString(2, student.getName());
@@ -32,7 +32,7 @@ public class StudentDBManager {
             if (rowAffected > 0) {
                 System.out.println("Student deleted Successfully!");
             } else
-                System.out.println("No department found with ID: " + student_id);
+                System.out.println("No student found with ID: " + student_id);
 
         } catch (Exception e) {
             e.printStackTrace();
