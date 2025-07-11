@@ -5,21 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="daea495d-6f81-4ecd-afb9-8d1ea7063546" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/DAO/DepartmentDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/DAO/StudentDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/DAO_IMPLEMENTATION/DepartmentDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/DAO_IMPLEMENTATION/StudentDaoImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/DATABASE/DB_Connection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/Model/Department.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/Model/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/Service/DepartmentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/Service/StudentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/Service_Implementation/DepartmentServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/testCompany/Service_Implementation/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +38,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Maven.Maven-Project [install].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
