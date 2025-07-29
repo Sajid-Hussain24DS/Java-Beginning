@@ -4,19 +4,23 @@ public class Student {
     private int studentId;
     private String name;
     private String rollNumber;
-    private Department department;
+    private  Department department;
 
     public Student() {}
-    public Student(int studentId, String name, String rollNumber, Department department) {
-        this.studentId = studentId;
-        this.name = name;
-        this.rollNumber = rollNumber;
-        this.department = department;
+  public Student(String name, String rollNumber, Department department) {
+    this.name = name;
+    this.rollNumber = rollNumber;
+    this.department = department;
+  }
+
+    public int getStudentId() {
+        return studentId;
     }
 
-    public int getStudentId() { return studentId; }
-    public void setStudentId(int studentId) { this.studentId = studentId; }
-
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+    
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
@@ -29,7 +33,7 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "ID=" + studentId +
+             
                 ", Name='" + name + '\'' +
                 ", Roll='" + rollNumber + '\'' +
                 ", Department=" + department +
