@@ -45,41 +45,45 @@ public class DepartmentDaoImpl implements DepartmentDao {
         }
     }
 
-    @Override
-    public List<Department> getAllDepartments() {
-        List<Department> list = new ArrayList<>();
-        try {
-            String sql = "SELECT * FROM departments";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Department d = new Department();
-                d.setDeptId(rs.getInt("dept_id"));
-                d.setDeptName(rs.getString("dept_name"));
-                d.setDeptCode(rs.getString("dept_code"));
-                list.add(d);
-            }
-        } catch (SQLException e) {
+  @Override
+public List<Department> getAllDepartments() {
+    List<Department> list = new ArrayList<>();
+    try {
+        String sql = "SELECT * FROM departments";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            Department d = new Department();  // ✅ use default constructor
+            d.setDeptId(rs.getInt("dept_id"));
+            d.setDeptName(rs.getString("dept_name"));
+            d.setDeptCode(rs.getString("dept_code"));
+            list.add(d);
         }
-        return list;
+    } catch (SQLException e) {
+        e.printStackTrace();  // ✅ Show any issues
     }
+    return list;
+}
 
-    @Override
-    public Department getDepartmentById(int deptId) {
-        Department d = null;
-        try {
-            String sql = "SELECT * FROM departments WHERE dept_id = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, deptId);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                d = new Department();
-                d.setDeptId(rs.getInt("dept_id"));
-                d.setDeptName(rs.getString("dept_name"));
-                d.setDeptCode(rs.getString("dept_code"));
-            }
-        } catch (SQLException e) {
+
+   @Override
+public Department getDepartmentById(int deptId) {
+    Department d = null;
+    try {
+        String sql = "SELECT * FROM departments WHERE dept_id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, deptId);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            d = new Department();  // ✅ use default constructor
+            d.setDeptId(rs.getInt("dept_id"));
+            d.setDeptName(rs.getString("dept_name"));
+            d.setDeptCode(rs.getString("dept_code"));
         }
-        return d;
+    } catch (SQLException e) {
+        e.printStackTrace();  // ✅ Show error if any
     }
+    return d;
+}
+
 }

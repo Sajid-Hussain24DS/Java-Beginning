@@ -5,9 +5,15 @@ public class Department {
     private String deptName;
     private String deptCode;
 
-    public Department() {}
+    public Department() {}   
+
     public Department(int deptId, String deptName, String deptCode) {
         this.deptId = deptId;
+        this.deptName = deptName;
+        this.deptCode = deptCode;
+    }
+
+    public Department(String deptName, String deptCode) {
         this.deptName = deptName;
         this.deptCode = deptCode;
     }
@@ -23,10 +29,6 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "ID=" + deptId +
-                ", Name='" + deptName + '\'' +
-                ", Code='" + deptCode + '\'' +
-                '}';
+        return this.deptName;  // So JComboBox will show only the name
     }
 }

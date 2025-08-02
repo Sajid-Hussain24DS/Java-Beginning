@@ -1,16 +1,18 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package ui;
 
 import DAO.StudentDao;
+import DATABASE.DB_Connection;
 import Model.Department;
 import Model.Student;
-import daoImpl.DepartmentDaoImpl;
 import daoImpl.StudentDaoImpl;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-
- 
- 
 
 /**
  *
@@ -26,9 +28,26 @@ public class registrationFrame extends javax.swing.JFrame {
     public registrationFrame() {
         initComponents();
         loadDepartments();
-         departmentField.addItem("Computer Science");
-        departmentField.addItem("Mathematics");
-        departmentField.addItem("Electrical Engineering");
+    }
+     private void loadDepartments() {
+        deptBox.addItem("Select Department"); // Default instruction item
+
+        try {
+            Connection con = DB_Connection.getDbConnection();
+            String query = "SELECT dept_name FROM departments";
+            PreparedStatement pst = con.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                deptBox.addItem(rs.getString("dept_name"));
+            }
+
+            rs.close();
+            pst.close();
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -41,20 +60,22 @@ public class registrationFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         nameLabel = new javax.swing.JLabel();
+        rollNumberLabel = new javax.swing.JLabel();
+        departmentLabel = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         rollNumberField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        deptBox = new javax.swing.JComboBox<>();
         addButton = new javax.swing.JButton();
-        departmentField = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         nameLabel.setText("Name");
 
-        jLabel1.setText("Roll Number");
+        rollNumberLabel.setText("Roll Number");
 
-        jLabel2.setText("Department");
+        departmentLabel.setText("Department");
+
+        nameField.setText(" ");
 
         addButton.setText("Add");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -68,122 +89,147 @@ public class registrationFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(addButton)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rollNumberLabel)
+                            .addComponent(departmentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                            .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(125, 125, 125)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                            .addComponent(nameField)
                             .addComponent(rollNumberField)
-                            .addComponent(departmentField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(195, Short.MAX_VALUE))
+                            .addComponent(deptBox, 0, 190, Short.MAX_VALUE))))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(rollNumberLabel)
                     .addComponent(rollNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(departmentField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(90, 90, 90)
+                    .addComponent(departmentLabel)
+                    .addComponent(deptBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(86, 86, 86)
                 .addComponent(addButton)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your hansydling code here:
-        String name = nameField.getText();
-        String roll = rollNumberField.getText();
-     Department dept = (Department) departmentField.getSelectedItem();
-        if (dept == null) {
-            JOptionPane.showMessageDialog(this, "Please select a department.");
-            return;
-        }
+        // TODO add your handling code here:
+        
+        System.out.println("Clicked Button");
+String name = nameField.getText();
+String rollNumber = rollNumberField.getText();
+String selectedDept = deptBox.getSelectedItem().toString().trim();
 
-        Student student = new Student(name, roll, dept);
-        StudentDao dao = new StudentDaoImpl();
-        dao.addStudent(student);
+// Step 1: Validate department selection
+if (selectedDept.equals("Select Department")) {
+    JOptionPane.showMessageDialog(this, "Please select a department.");
+    return;
+}
+int deptId = 0;
+ String deptCode = "";
+System.out.println("Selected department: [" + selectedDept + "]");
+// Step 2: Get dept_id from DB
+try {
+    Connection con = DB_Connection.getDbConnection();
+    String sql = "SELECT dept_id FROM departments WHERE dept_name = ?";
+    PreparedStatement pst = con.prepareStatement(sql);
+    pst.setString(1, selectedDept);
+    ResultSet rs = pst.executeQuery();
 
-        JOptionPane.showMessageDialog(this, "Student Registered Successfully!");
-
-        //} else {
-            //JOptionPane.showMessageDialog(this, "Registration Failed.");
-        }
-
-    
-    private void loadDepartments() {
-       try {
-        departmentField.removeAllItems(); // Clear old items
-        DepartmentDaoImpl dao = new DepartmentDaoImpl();
-        List<Department> list = dao.getAllDepartments();
-
-        for (Department dept : list) {
-            departmentField.addItem(dept); // Add Department objects, not just strings
-        }
-
-        // 🔽 Put the renderer here
-        departmentField.setRenderer(new javax.swing.DefaultListCellRenderer() {
-            @Override
-            public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                if (value instanceof Department) {
-                    value = ((Department) value).getDeptName(); // Show only dept name in dropdown
-                }
-                return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            }
-        });
-
-    } catch (Exception e) {
-        e.printStackTrace();
+    if (rs.next()) {
+        deptId = rs.getInt("dept_id");
     }
+
+    rs.close();
+    pst.close();
+    con.close();
+} catch (Exception e) {
+    e.printStackTrace();
+}
+
+if (deptId == 0) {
+    JOptionPane.showMessageDialog(this, "Selected department not found in database.");
+    return;
+}
+
+// ✅ Construct Department object
+Department department = new Department();
+department.setDeptId(deptId);
+department.setDeptName(selectedDept);
+department.setDeptCode(deptCode);
+
+// ✅ Now create and set Student
+Student student = new Student();
+student.setName(nameField.getText());
+student.setRollNumber(rollNumberField.getText());
+student.setDepartment(department);
+StudentDao studentDao = new StudentDaoImpl();
+studentDao.addStudent(student);
+
+//        System.out.println("Clicked Button");
+//        String name = nameField.getText();
+//        String rollNumber = rollNumberField.getText();
+//        String dept = deptBox.getSelectedItem().toString();
+//        
+//        Student student = new Student();
+//         student.setName(name);
+//         student.setRollNumber(rollNumber);
+//         
+//         StudentDao studentDao = new StudentDaoImpl();
+//         studentDao.addStudent(student);
+//          
     }//GEN-LAST:event_addButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-         try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (Exception ex) {
-        ex.printStackTrace();
-    }
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new registrationFrame().setVisible(true);  
-        }
-    });
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new registrationFrame().setVisible(true));
+        
+        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
-    private javax.swing.JComboBox<String> departmentField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel departmentLabel;
+    private javax.swing.JComboBox<String> deptBox;
     private javax.swing.JTextField nameField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField rollNumberField;
+    private javax.swing.JLabel rollNumberLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,7 @@ import DAO.StudentDao;
 import DATABASE.DB_Connection;
 import Model.Department;
 import Model.Student;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,22 +15,21 @@ public class StudentDaoImpl implements StudentDao {
     private DepartmentDaoImpl departmentDao = new DepartmentDaoImpl();
 
     @Override
-    public void addStudent(Student student) {
-        try {
-            if (student == null || student.getDepartment() == null) {
-                System.out.println("Invalid student or department.");
-                return;
-            }
+     public void addStudent(Student student) {
+        if (student == null || student.getDepartment() == null) {
+            System.out.println("❌ Invalid student or department.");
+            return;
+        }
 
-            String sql = "INSERT INTO students (student_name, roll_number, dept_id) VALUES (?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        String sql = "INSERT INTO students (student_name, roll_number, dept_id) VALUES (?, ?, ?)";
 
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, student.getName());
             stmt.setString(2, student.getRollNumber());
-            stmt.setInt(3, student.getDepartment().getDeptId());  // ✅ FIXED: get dept ID
+            stmt.setInt(3, student.getDepartment().getDeptId());
 
             stmt.executeUpdate();
-            System.out.println("✅ Student Added Successfully!");
+            System.out.println("✅ Student added successfully!");
         } catch (SQLException e) {
             System.out.println("❌ Error adding student:");
             e.printStackTrace();
@@ -38,16 +38,16 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public void deleteStudent(int studentId) {
-        try {
-            String sql = "DELETE FROM students WHERE student_id = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+        String sql = "DELETE FROM students WHERE student_id = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, studentId);
 
             int rows = stmt.executeUpdate();
             if (rows > 0) {
-                System.out.println("✅ Student Deleted!");
+                System.out.println("✅ Student deleted!");
             } else {
-                System.out.println("⚠️ Student Not Found!");
+                System.out.println("⚠️ Student not found!");
             }
         } catch (SQLException e) {
             System.out.println("❌ Error deleting student:");
@@ -58,10 +58,10 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public List<Student> getAllStudents() {
         List<Student> list = new ArrayList<>();
-        try {
-            String sql = "SELECT * FROM students";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
+        String sql = "SELECT * FROM students";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 Student s = new Student();
@@ -71,7 +71,7 @@ public class StudentDaoImpl implements StudentDao {
 
                 int deptId = rs.getInt("dept_id");
                 Department dept = departmentDao.getDepartmentById(deptId);
-                s.setDepartment(dept);  // ✅ FIXED
+                s.setDepartment(dept);
 
                 list.add(s);
             }
@@ -82,12 +82,16 @@ public class StudentDaoImpl implements StudentDao {
         return list;
     }
 
-    // ✅ If you use this method in your code elsewhere, now it's fully supported
     @Override
     public boolean insertStudent(Student student) {
-        try {
-            String sql = "INSERT INTO students (student_name, roll_number, dept_id) VALUES (?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+        if (student == null || student.getDepartment() == null) {
+            System.out.println("❌ Invalid student or department.");
+            return false;
+        }
+
+        String sql = "INSERT INTO students (student_name, roll_number, dept_id) VALUES (?, ?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, student.getName());
             stmt.setString(2, student.getRollNumber());
             stmt.setInt(3, student.getDepartment().getDeptId());
